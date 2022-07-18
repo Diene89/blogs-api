@@ -2,32 +2,38 @@ const Joi = require('joi');
 const { User } = require('../database/models');
 const createToken = require('../helpers/token');
 
-const validateBody = (data) => {
-    const schema = Joi.object({
-    email: Joi.string().email().required().empty(),
-    password: Joi.string().required().empty(),
-    });
-    
+const validateBody = (data, schema) => {
     const { error, value } = schema.validate(data);
     if (error) {
-        const e = new Error('Some required fields are missing');
-            e.name = 'ValidationError';
-            throw e;
+        error.name = 'ValidationError';
+        throw error;
     }
     return value;
 };
 
 const loginService = async (email, password) => {
-        validateBody({ email, password });
-        const user = await User.findOne({ where: { email } });
+    const schema = Joi.object({
+        email: Joi.string().email().required()
+            .error(new Error('Some required fields are missing')),
+        password: Joi.string().required()
+            .error(new Error('Some required fields are missing')),
+    });
     
-        if (!user || user.password !== password) {
-            const e = new Error('Invalid fields');
-            e.name = 'loginError';
-            throw e;
-        }
-        const token = createToken(email);
-        return { token };
+    validateBody({ email, password }, schema);
+    const user = await User.findOne({ where: { email } });
+    
+    if (!user || user.password !== password) {
+        const e = new Error('Invalid fields');
+        e.name = 'loginError';
+        throw e;
+    }
+    const token = createToken(email);
+    return { token };
 };
 
-module.exports = { loginService };
+// const userService = async ({ displayName, email, password, image }) => {
+//     const user = await User.create({ displayName, email, password, image });
+    
+// };
+
+module.exports = { loginService, validateBody };
