@@ -14,4 +14,3 @@ const error = (err, _req, res, next) => {
   };
   
   module.exports = error;
-  

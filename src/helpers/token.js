@@ -11,6 +11,6 @@ const createToken = (param) => {
       const token = jwt.sign({ data: param }, secret, jwtConfig);
     
       return token;
-}
+};
 
 module.exports = createToken;
