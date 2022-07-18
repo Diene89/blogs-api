@@ -1,7 +1,5 @@
 'use strict';
 
-const { allow } = require("joi");
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Users', {
@@ -28,14 +26,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       }
-      // createdAt: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE,
-      // },
-      // updatedAt: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE,
-      // }
     })
   },
 
