@@ -9,7 +9,7 @@ const validateBody = (data, schema) => {
     return value;
 };
 
-const userService = async (displayName, email, password, image) => {
+const createUser = async (displayName, email, password, image) => {
     const schema = Joi.object({
         displayName: Joi.string().required().min(8),
         email: Joi.string().email().required(),
@@ -29,4 +29,15 @@ const userService = async (displayName, email, password, image) => {
     return { token }; 
 };
 
-module.exports = userService;
+const listUsers = async () => {
+    const users = await User.findAll({
+        attributes: {
+            exclude: ['password'],
+        },
+    });
+    return users;
+};
+
+module.exports = {
+    createUser, listUsers,
+};

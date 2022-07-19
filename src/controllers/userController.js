@@ -1,11 +1,18 @@
 const userService = require('../services/userService');
 
-const userController = async (req, res) => {
+const createUser = async (req, res) => {
     const { displayName, email, password, image } = req.body;
 
-    const result = await userService(displayName, email, password, image);
-    console.log('ooooooooooooo', result);
+    const result = await userService.createUser(displayName, email, password, image);
     return res.status(201).json(result);
 };
+
+const listUsers = async (req, res) => {
+    const result = await userService.listUsers();
     
-module.exports = userController;
+    return res.status(200).json(result);
+};
+    
+module.exports = {
+    createUser, listUsers,
+};

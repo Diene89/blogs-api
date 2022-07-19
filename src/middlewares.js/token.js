@@ -13,7 +13,13 @@ const createToken = (param) => {
       return token;
 };
 
-const validateToken = (token) => {
+const validateToken = (req, _res, next) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    const err = new Error('Token not found');
+    err.name = 'InvalidToken';
+    throw err;
+  }
   try {
     jwt.verify(token, process.env.JWT_SECRET);
   } catch (error) {
@@ -21,6 +27,8 @@ const validateToken = (token) => {
     err.name = 'InvalidToken';
     throw err;
   }
+
+  next();
 };
 
 module.exports = {

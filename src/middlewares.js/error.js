@@ -10,6 +10,9 @@ const error = (err, _req, res, next) => {
       case 'userError':
         res.status(409).json({ message: err.message });
         break;
+      case 'InvalidToken':
+        res.status(401).json({ message: err.message });
+        break;
       default: res.status(500).json({ message: err.message });
         break;
     }
