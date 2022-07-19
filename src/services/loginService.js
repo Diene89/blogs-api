@@ -24,7 +24,7 @@ const loginService = async (email, password) => {
     
     if (!user || user.password !== password) {
         const e = new Error('Invalid fields');
-        e.name = 'loginError';
+        e.name = 'ValidationError';
         throw e;
     }
     const token = createToken(email);

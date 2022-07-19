@@ -1,9 +1,5 @@
 const error = (err, _req, res, next) => {
-    console.log('meu erroooooo', err);
     switch (err.name) {
-      case 'loginError':
-        res.status(400).json({ message: err.message });
-        break;
       case 'ValidationError':
           res.status(400).json({ message: err.message });
         break;    
@@ -12,6 +8,9 @@ const error = (err, _req, res, next) => {
         break;
       case 'InvalidToken':
         res.status(401).json({ message: err.message });
+        break;
+      case 'userNotExistError':
+        res.status(404).json({ message: err.message });
         break;
       default: res.status(500).json({ message: err.message });
         break;

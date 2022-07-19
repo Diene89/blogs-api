@@ -9,10 +9,17 @@ const createUser = async (req, res) => {
 
 const listUsers = async (req, res) => {
     const result = await userService.listUsers();
-    
+
+    return res.status(200).json(result);
+};
+
+const findUserById = async (req, res) => {
+    const { id } = req.params;
+    const result = await userService.findUserById(id);
+
     return res.status(200).json(result);
 };
     
 module.exports = {
-    createUser, listUsers,
+    createUser, listUsers, findUserById,
 };
