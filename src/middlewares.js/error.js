@@ -1,4 +1,5 @@
 const error = (err, _req, res, next) => {
+  console.log('erroooooooo', err);
     switch (err.name) {
       case 'ValidationError':
           res.status(400).json({ message: err.message });
