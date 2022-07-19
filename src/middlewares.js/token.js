@@ -13,4 +13,16 @@ const createToken = (param) => {
       return token;
 };
 
-module.exports = createToken;
+const validateToken = (token) => {
+  try {
+    jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    const err = new Error('Expired or invalid token');
+    err.name = 'InvalidToken';
+    throw err;
+  }
+};
+
+module.exports = {
+  createToken, validateToken,
+};

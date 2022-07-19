@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { User } = require('../database/models');
-const createToken = require('../middlewares.js/token');
+const { createToken } = require('../middlewares.js/token');
 
 const validateBody = (data, schema) => {
     const { error, value } = schema.validate(data);
