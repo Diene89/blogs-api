@@ -1,3 +1,4 @@
+const sequelize = require('sequelize');
 const createBlogPost = (sequelize, DataTypes) => {
     const BlogPost = sequelize.define('BlogPost', {
         id: {
