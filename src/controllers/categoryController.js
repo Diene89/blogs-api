@@ -14,6 +14,13 @@ const listCategories = async (req, res) => {
     return res.status(200).json(result);
 };
 
+const findCategoryById = async (req, res) => {
+    const { id } = req.params;
+    const result = await categoryService.findCategoryById(id);
+
+    return res.status(200).json(result);
+};
+
 module.exports = { 
-    createCategory, listCategories,
+    createCategory, listCategories, findCategoryById,
 };

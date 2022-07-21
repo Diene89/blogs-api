@@ -8,4 +8,6 @@ categoryRoute.post('/', validateToken, categoryController.createCategory);
 
 categoryRoute.get('/', validateToken, categoryController.listCategories);
 
+categoryRoute.get('/:id', validateToken, categoryController.findCategoryById);
+
 module.exports = categoryRoute;

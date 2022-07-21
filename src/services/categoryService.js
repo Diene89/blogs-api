@@ -13,7 +13,6 @@ const createCategory = async (name) => {
     });
     // const result = await schema.validateAsync(name);
    validateBody({ name }, schema);
-    console.log('passou');
     const category = await Category.create({ name });
     return category;
 };
@@ -23,6 +22,16 @@ const listCategories = async () => {
     return categories;
 };
 
+const findCategoryById = async (id) => {
+    const category = await Category.findByPk(id);
+    if (!category) {
+        const e = new Error('"categoryIds" not found');
+        e.name = 'ValidationError';
+        throw e;
+    }
+    return category;
+};
+
 module.exports = {
-    createCategory, listCategories,
+    createCategory, listCategories, findCategoryById,
 };

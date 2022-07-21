@@ -1,5 +1,6 @@
 const express = require('express');
 require('express-async-errors');
+const postRoute = require('./database/routes/postRoutes');
 const categoryRoute = require('./database/routes/categoryRoutes');
 const loginRoute = require('./database/routes/loginRoutes');
 const userRoute = require('./database/routes/userRoutes');
@@ -16,6 +17,8 @@ app.use('/login', loginRoute);
 app.use('/user', userRoute);
 
 app.use('/categories', categoryRoute);
+
+app.use('/post', postRoute);
 
 app.use(error);
 
