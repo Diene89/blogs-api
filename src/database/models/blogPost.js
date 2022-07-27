@@ -20,17 +20,17 @@ const createBlogPost = (sequelize, DataTypes) => {
             foreignKey: true
         },
         published: {
-            type: DataTypes.DATE,
-            field: 'created_at',
+            type: DataTypes.DATE
         },
         updated: {
-            type: DataTypes.DATE,
-            field: 'updated_at',
+            type: DataTypes.DATE
         },
     },
     {
         tableName: 'BlogPosts',
-        timestamps: false,
+        timestamps: true,
+        createdAt: "published",
+        updatedAt: "updated",
     });
 
     BlogPost.associate = (models) => {
